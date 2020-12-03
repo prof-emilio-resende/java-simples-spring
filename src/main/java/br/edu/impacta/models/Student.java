@@ -12,6 +12,14 @@ public class Student {
         this.ra = ra;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", ra=" + ra +
+                '}';
+    }
+
     public String getName() {
         return name;
     }
