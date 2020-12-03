@@ -1,15 +1,16 @@
-import br.edu.impacta.repositories.StudentRepository;
-import br.edu.impacta.repositories.StudentRepositoryImpl;
+import br.edu.impacta.AppConfig;
 import br.edu.impacta.services.StudentService;
-import br.edu.impacta.services.StudentServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Application {
     public static void main(String[] args) {
         System.out.println("Iniciando aplicação java...");
+        var context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        System.out.println("Obtendo servico de busca de estudantes");
+        var svc = context.getBean("studentService", StudentService.class);
 
         System.out.println("Obtendo lista de estudantes...");
-        StudentRepository repo = new StudentRepositoryImpl();
-        StudentService svc = new StudentServiceImpl(repo);
         var students = svc.findAll();
         students.forEach(System.out::println);
 
