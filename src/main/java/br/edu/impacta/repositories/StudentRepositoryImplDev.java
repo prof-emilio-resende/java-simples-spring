@@ -13,18 +13,15 @@ import java.util.UUID;
 
 @Repository("studentRepository")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Profile("prod")
-public class StudentRepositoryImpl implements StudentRepository {
-    @Autowired
-    private Student student;
-
-    public StudentRepositoryImpl(@Value("#{ T(java.util.UUID).randomUUID() }") UUID uuid) {
+@Profile("dev")
+public class StudentRepositoryImplDev implements StudentRepository {
+    public StudentRepositoryImplDev(@Value("#{ T(java.util.UUID).randomUUID() }") UUID uuid) {
         System.out.println(String.format("Criando instancia de repositorio %s", uuid));
     }
 
     @Override
     public List<Student> findAll() {
         System.out.println("estou indo buscar dados!!!");
-        return List.of(student);
+        return List.of(new Student("dev profile", 888));
     }
 }
